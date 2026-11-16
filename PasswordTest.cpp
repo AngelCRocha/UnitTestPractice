@@ -21,6 +21,29 @@ TEST(PasswordTest, single_letter_password)
 	ASSERT_EQ(1, actual);
 }
 
+TEST(PasswordTest, repeated_leading_characters)
+{
+	Password my_password;
+
+	ASSERT_EQ(4, my_password.count_leading_characters("aaaa"));
+	ASSERT_EQ(3, my_password.count_leading_characters("!!!?"));
+}
+
+TEST(PasswordTest, stops_at_first_different_character)
+{
+	Password my_password;
+
+	ASSERT_EQ(3, my_password.count_leading_characters("aaab"));
+	ASSERT_EQ(1, my_password.count_leading_characters("abcd"));
+}
+
+TEST(PasswordTest, leading_character_count_is_case_sensitive)
+{
+	Password my_password;
+
+	ASSERT_EQ(2, my_password.count_leading_characters("AAa"));
+}
+
 TEST(PasswordTest, mixed_case_password)
 {
 	Password my_password;
